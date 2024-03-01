@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,7 +26,8 @@ namespace ZadatakA16c
                 konekcija = new SqlConnection
                 (@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\A16.mdf;Integrated Security=True");
                 osveziPse();
-                osveziIzlozbe();
+                osveziIzlozbe1();
+                osveziIzlozbe2();
                 osveziKategorije();
             }
             catch (Exception ex)
@@ -54,19 +56,19 @@ namespace ZadatakA16c
                 MessageBox.Show("Greska: " + ex.Message);
             }
         }
-        private void osveziIzlozbe()
+        private void osveziIzlozbe1() // u buducnosti
         {
             try
             {
                 SqlCommand komanda = new SqlCommand
                     ("SELECT IzlozbaID, " +
                     "CONCAT(IzlozbaID,' - ',Mesto,' - ',Datum) AS ImeIzlozbe  " +
-                    "FROM Izlozba",
+                    "FROM Izlozba " +
+                    "WHERE Datum>=GETDATE()",
                     konekcija);
                 SqlDataAdapter adapter = new SqlDataAdapter(komanda);
                 DataTable tabela = new DataTable();
                 adapter.Fill(tabela);
-                comboBoxIzlozba.Items.Clear();
                 comboBoxIzlozba.DataSource = tabela;
                 comboBoxIzlozba.DisplayMember = "ImeIzlozbe";
                 comboBoxIzlozba.ValueMember = "IzlozbaID";
@@ -76,6 +78,29 @@ namespace ZadatakA16c
                 MessageBox.Show("Greska: " + ex.Message);
             }
         }
+        private void osveziIzlozbe2()
+        {
+            try
+            {
+                SqlCommand komanda = new SqlCommand
+                    ("SELECT IzlozbaID, " +
+                    "CONCAT(IzlozbaID,' - ',Mesto,' - ',Datum) AS ImeIzlozbe  " +
+                    "FROM Izlozba " +
+                    "WHERE Datum<=GETDATE()",
+                    konekcija);
+                SqlDataAdapter adapter = new SqlDataAdapter(komanda);
+                DataTable tabela = new DataTable();
+                adapter.Fill(tabela);
+                comboBox1.DataSource = tabela;
+                comboBox1.DisplayMember = "ImeIzlozbe";
+                comboBox1.ValueMember = "IzlozbaID";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Greska: " + ex.Message);
+            }
+        }
+
         private void osveziKategorije()
         {
             try
@@ -158,5 +183,68 @@ namespace ZadatakA16c
             }
         }
 
+        private void buttonPrikazi_Click(object sender, EventArgs e)
+        {
+            string upit = "SELECT Kategorija.KategorijaID AS Sifra, " +
+                "Kategorija.Naziv AS NazivKategorije, " +
+                "COUNT(*) AS BrojPasa " +
+                "FROM Kategorija, Rezultat " +
+                "WHERE Kategorija.KategorijaID=Rezultat.KategorijaID " +
+                "AND Rezultat.IzlozbaID=@IzlozbaID " +
+                "AND LEN(Rezultat.Napomena)>0 " +
+                "GROUP BY Kategorija.KategorijaID, Kategorija.Naziv";
+            try
+            {
+                SqlCommand komanda = new SqlCommand(upit, konekcija);
+                komanda.Parameters.AddWithValue
+                    ("@IzlozbaID", comboBox1.SelectedValue);
+                SqlDataAdapter adapter = new SqlDataAdapter(komanda);
+                DataTable tabela = new DataTable();
+                adapter.Fill(tabela);
+                dataGridView1.DataSource = tabela;
+                chart1.DataSource = tabela;
+                chart1.Series[0].XValueMember = "NazivKategorije";
+                chart1.Series[0].YValueMembers = "BrojPasa";
+                chart1.Series[0].IsValueShownAsLabel = true;
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Greska: " + ex.Message);
+            }
+            // broja prijavljenih pasa
+            string upitPrijavljeno= "SELECT COUNT(*) " +
+                "FROM Rezultat " +
+                "WHERE IzlozbaID=@IzlozbaID";
+            string upitTakmicilo= "SELECT COUNT(*) " +
+                "FROM Rezultat " +
+                "WHERE IzlozbaID=@IzlozbaID " +
+                "AND LEN(Napomena)>0";
+            try
+            {
+                SqlCommand komandaPrijavljeno = new SqlCommand(upitPrijavljeno, konekcija);
+                komandaPrijavljeno.Parameters.AddWithValue
+                    ("@IzlozbaID", comboBox1.SelectedValue);
+                SqlCommand komandaTakmicilo = new SqlCommand(upitTakmicilo, konekcija);
+                komandaTakmicilo.Parameters.AddWithValue
+                    ("@IzlozbaID", comboBox1.SelectedValue);
+                konekcija.Open();
+                int prijavljeno = (int)komandaPrijavljeno.ExecuteScalar();
+                int takmicilo = (int)komandaTakmicilo.ExecuteScalar();
+                labelPrijavljeno.Text = "Ukupan broj pasa koji je prijavljen " 
+                    + prijavljeno;
+                labelUcestvovalo.Text = "Ukupan broj pasa koji se takmicio " +
+                    komandaTakmicilo.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Greska: " + ex.Message);
+            }
+            finally
+            {
+                konekcija.Close();
+            }
+
+        }
     }
 }
