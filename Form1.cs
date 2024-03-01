@@ -124,6 +124,7 @@ namespace ZadatakA16c
                 MessageBox.Show("Greska: " + ex.Message);
                 return;
             }
+            // provera da li je pas vec prijavljen
             if (tabela.Rows.Count > 0)
             {
                 MessageBox.Show("Pas je vec prijavljen!");
