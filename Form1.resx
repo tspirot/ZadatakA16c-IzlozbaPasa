@@ -117,4 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value> Функционалност таб менија:
+
+ Ставка менија Unesi prijavu омогућава попуњавање пријаве;
+
+Ставка менија Statistika приказује форму са графиконом;
+
+Ставка менија O aplikaciji треба да отвори кратко корисничко упутство;
+
+Ставка менија Izlaz затвара апликацију.</value>
+  </data>
 </root>
