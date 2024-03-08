@@ -29,9 +29,11 @@ namespace ZadatakA16c
         public bool Ostenjen { get; set; }
         public int VlasnikID { get; set; }
         public int PolID { get; set; }
+        public Nullable<int> OdgajivacID { get; set; }
     
         public virtual Boja Boja { get; set; }
         public virtual Duzina_Dlake Duzina_Dlake { get; set; }
+        public virtual Odgajivaci Odgajivaci { get; set; }
         public virtual Pol Pol { get; set; }
         public virtual Rasa Rasa { get; set; }
         public virtual Vlasnik Vlasnik { get; set; }

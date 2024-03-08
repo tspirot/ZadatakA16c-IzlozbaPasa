@@ -4,20 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2a078a87823344aebd3066972d74f84c" Name="Diagram1">
+      <Diagram DiagramId="b1338da8f5f440d38d7c930e8316d0b3" Name="Diagram1" ZoomLevel="97">
         <EntityTypeShape EntityType="A16Model.Boja" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="A16Model.Duzina_Dlake" Width="1.5" PointX="0.5" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="A16Model.Izlozba" Width="1.5" PointX="8.125" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="A16Model.Kategorija" Width="1.5" PointX="8.125" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="A16Model.Pas" Width="1.5" PointX="3.25" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="A16Model.Pol" Width="1.5" PointX="0.5" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="A16Model.Rasa" Width="1.5" PointX="6.25" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="A16Model.Rezultat" Width="1.5" PointX="5.5" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="A16Model.Vlasnik" Width="1.5" PointX="4.125" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="A16Model.Duzina_Dlake" Width="1.5" PointX="0.625" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="A16Model.Izlozba" Width="1.5" PointX="7.375" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="A16Model.Kategorija" Width="1.5" PointX="7.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="A16Model.Odgajivaci" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="A16Model.Pas" Width="1.5" PointX="3" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="A16Model.Pol" Width="1.5" PointX="2.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="A16Model.Rasa" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="A16Model.Rezultat" Width="1.5" PointX="5.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="A16Model.Vlasnik" Width="1.5" PointX="4.625" PointY="6" IsExpanded="true" />
         <AssociationConnector Association="A16Model.FK_Pas_ToBoja" ManuallyRouted="false" />
         <AssociationConnector Association="A16Model.FK_Pas_ToDuzina_Dlake" ManuallyRouted="false" />
         <AssociationConnector Association="A16Model.FK_Rezultat_Izlozba" ManuallyRouted="false" />
         <AssociationConnector Association="A16Model.FK_Rezultat_Kategorija" ManuallyRouted="false" />
+        <AssociationConnector Association="A16Model.FK_Pas_ToOdgajivaci" ManuallyRouted="false" />
         <AssociationConnector Association="A16Model.FK_Pas_ToPol" ManuallyRouted="false" />
         <AssociationConnector Association="A16Model.FK_Pas_ToRasa" ManuallyRouted="false" />
         <AssociationConnector Association="A16Model.FK_Pas_ToVlasnik" ManuallyRouted="false" />

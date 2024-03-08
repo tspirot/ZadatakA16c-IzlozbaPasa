@@ -12,18 +12,21 @@ namespace ZadatakA16c
     using System;
     using System.Collections.Generic;
     
-    public partial class Rasa
+    public partial class Odgajivaci
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Rasa()
+        public Odgajivaci()
         {
             this.Pas = new HashSet<Pas>();
         }
     
-        public int RasaID { get; set; }
-        public string NazivRase { get; set; }
-        public string Napomena { get; set; }
-        public string Nova { get; set; }
+        public int OdgajivacId { get; set; }
+        public string Ime { get; set; }
+        public string Telefon { get; set; }
+        public string Email { get; set; }
+        public string Adresa { get; set; }
+        public string Drzava { get; set; }
+        public string Grad { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pas> Pas { get; set; }

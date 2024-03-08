@@ -13,10 +13,10 @@ namespace ZadatakA16c
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class A16Entities : DbContext
+    public partial class A16Entities1 : DbContext
     {
-        public A16Entities()
-            : base("name=A16Entities")
+        public A16Entities1()
+            : base("name=A16Entities1")
         {
         }
     
@@ -29,6 +29,7 @@ namespace ZadatakA16c
         public virtual DbSet<Duzina_Dlake> Duzina_Dlake { get; set; }
         public virtual DbSet<Izlozba> Izlozba { get; set; }
         public virtual DbSet<Kategorija> Kategorija { get; set; }
+        public virtual DbSet<Odgajivaci> Odgajivaci { get; set; }
         public virtual DbSet<Pas> Pas { get; set; }
         public virtual DbSet<Pol> Pol { get; set; }
         public virtual DbSet<Rasa> Rasa { get; set; }
